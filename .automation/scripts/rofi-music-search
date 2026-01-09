@@ -1,0 +1,20 @@
+#!/bin/bash
+# The '&' ensures the script doesn't wait for the HDD to finish scanning
+mpc update > /dev/null 2>&1 &
+ROFI_OPTS="-kb-custom-1 alt+p -theme ~/.config/rofi/music.rasi"
+# We are using the absolute path to ensure no interpretation errors
+selection=$(mpc listall | rofi -dmenu -i -p " Search:" -kb-custom-1 alt+p -theme /home/$USER/.config/rofi/music.rasi)
+exit_code=$?
+
+case $exit_code in
+    0)
+        if [ -n "$selection" ]; then
+            mpc clear && mpc add "$selection" && mpc play
+        fi
+        ;;
+    10)
+        mpc toggle
+        # Using the absolute path to restart the script reliably
+        /home/$USER/.automation/scripts/music-search.sh
+        ;;
+esac

@@ -1,0 +1,13 @@
+# Force a vertical stack layout
+layout tall
+
+# PANE 1: The Editor (Top)
+# We launch nvim directly. When you :q, it returns to the shell.
+launch nvim ${LATEX_FILE}
+
+# PANE 2: The Compiler (Bottom)
+# This creates the second pane you asked for at the bottom.
+launch zsh
+
+# Resize the bottom pane immediately so it is small
+resize_window shorter 15

@@ -1,0 +1,22 @@
+# --- THEME (Catppuccin Mocha) ---
+set default-bg                  "#1e1e2e"
+set default-fg                  "#cdd6f4"
+set statusbar-bg                "#181825"
+set statusbar-fg                "#cdd6f4"
+set inputbar-bg                 "#313244"
+set inputbar-fg                 "#cdd6f4"
+
+# --- BEHAVIOR ---
+set selection-clipboard         clipboard
+set render-loading              "false"
+set scroll-step                 50
+set sandbox                     none
+
+# --- LIVE PREVIEW SETTINGS ---
+# This makes the refresh "seamless" instead of a white flash
+set recolor                     "true"
+set recolor-lightcolor          "#1e1e2e"
+set recolor-darkcolor           "#cdd6f4"
+
+# --- UI ---
+set guioptions                  "none"

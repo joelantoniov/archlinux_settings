@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# 1. Ingresar el texto (se mantiene tu tema elegante)
+text=$(rofi -dmenu -p "󰗊 Texto a traducir:" -theme ~/.config/rofi/music.rasi)
+
+if [ -z "$text" ]; then exit; fi
+
+# 2. Lista extendida de idiomas (ordenados para tu flujo de trabajo)
+# El orden aquí es: Español, Inglés, Italiano, Português, Latín, Francés, Polaco, Alemán, Ruso
+options="Español\nInglés\nItaliano\nPortuguês\nLatín\nFrancés\nPolaco\nAlemán\nRuso"
+
+target=$(echo -e "$options" | rofi -dmenu -p "Destino:" -theme ~/.config/rofi/music.rasi)
+
+# 3. Mapeo de códigos de idioma para translate-shell
+case $target in
+    Español)   lang=":es" ;;
+    Inglés)    lang=":en" ;;
+    Italiano)  lang=":it" ;;
+    Português) lang=":pt" ;;
+    Latín)     lang=":la" ;;
+    Francés)   lang=":fr" ;;
+    Polaco)    lang=":pl" ;;
+    Alemán)    lang=":de" ;;
+    Ruso)      lang=":ru" ;;
+    *) exit ;;
+esac
+
+# 4. Ejecución silenciosa y eficiente
+# Usamos -b (brief) para no saturar tus 15.4Gi de RAM con procesos pesados
+translation=$(trans -b "$lang" "$text")
+
+# 5. Resultado final con opción de copia automática
+echo "$translation" | rofi -dmenu -p "󰅩 ($target):" -theme ~/.config/rofi/music.rasi | xclip -selection clipboard
